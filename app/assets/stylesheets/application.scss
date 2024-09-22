@@ -19,6 +19,12 @@ body {
   color: $text-color;
 }
 
+.site_logo {
+  width: 80px;
+  height: 80px;
+  display: inline-block;
+}
+
 @media (max-width: 1024px) {
   :root {
     font-size: 15px;
@@ -35,17 +41,9 @@ body {
   $main-description-font-size: 0.9rem;
 }
 
-@media (max-width: 550px) {
-  :root {
-    font-size: 13px;
-  }
-  $section-heading-font-size: 1.6rem;
-  $main-description-font-size: 0.85rem;
-}
-
 @media (max-width: 470px) {
   :root {
-    font-size: 12px;
+    font-size: 14px;
   }
   $section-heading-font-size: 1.5rem;
   $main-description-font-size: 0.8rem;
@@ -53,7 +51,7 @@ body {
 
 @media (max-width: 380px) {
   :root {
-    font-size: 11px;
+    font-size: 14px;
   }
   $section-heading-font-size: 1.4rem;
   $main-description-font-size: 0.75rem;
@@ -61,7 +59,7 @@ body {
 
 @media (max-width: 320px) {
   :root {
-    font-size: 10px;
+    font-size: 14px;
   }
   $section-heading-font-size: 1.2rem;
   $main-description-font-size: 0.7rem;
