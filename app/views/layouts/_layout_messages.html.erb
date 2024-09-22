@@ -1,0 +1,20 @@
+<% flash.each do |name, msg| %>
+  <% alert_class = name == :success ? "bg-green-500" : (name == :danger ? "bg-red-500" : "bg-blue-500") %>
+  <div class="alert <%= alert_class %> text-white px-6 py-4 border-0 rounded relative mb-4" role="alert">
+    <span class="text-xl inline-block mr-5 align-middle">
+      <% if name == :success %>
+        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 0a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm1.22 14.53a1 1 0 0 1-1.45 0L6.7 11.7a1 1 0 1 1 1.41-1.41L9 12.58l3.88-3.88a1 1 0 1 1 1.41 1.41l-4.16 4.16z"/></svg>
+      <% elsif name == :danger %>
+        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 0a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm1.22 14.53a1 1 0 0 1-1.45 0L6.7 11.7a1 1 0 1 1 1.41-1.41L9 12.58l3.88-3.88a1 1 0 1 1 1.41 1.41l-4.16 4.16z"/></svg>
+      <% else %>
+        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 0a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm1.22 14.53a1 1 0 0 1-1.45 0L6.7 11.7a1 1 0 1 1 1.41-1.41L9 12.58l3.88-3.88a1 1 0 1 1 1.41 1.41l-4.16 4.16z"/></svg>
+      <% end %>
+    </span>
+    <span class="inline-block align-middle mr-8">
+      <%= msg %>
+    </span>
+    <button class="absolute top-0 right-0 mt-4 mr-6 text-2xl font-semibold leading-none outline-none focus:outline-none" onclick="this.parentElement.style.display='none'">
+      <span>×</span>
+    </button>
+  </div>
+<% end %>

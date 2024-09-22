@@ -1,0 +1,71 @@
+@import 'application';
+
+.join-us {
+  display: flex;
+  height: 100vh;
+
+  &_right {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffff;
+
+    &_already {
+      font-size: 0.75rem;
+      margin: 15px 10px 10px 0px;
+      &_text {
+        display: inline-block;
+      }
+      &_link {
+        color: $small-link-color;
+        display: inline-block;
+      }
+    }
+
+    &_card {
+      display: flex;
+      max-width: 500px;
+      width: 90%;
+      flex-direction: column;
+      justify-content: center;
+      border-radius: 10px;
+      padding: 20px;
+
+      &_heading {
+        font-weight: 500;
+        font-size: $section-heading-font-size;
+        color: $section-heading-color;
+      }
+
+      &_text {
+        margin-bottom: 50px;
+        font-size: $main-description-font-size;
+      }
+
+      &_links_list {
+        * {
+          background-color: $green-btn-bg;
+          padding: 8px 17px 8px 17px;
+          margin-right: 5px;
+          color: $blue-btn-text;
+          border-radius: 5px;
+        }
+      }
+    }
+  }
+
+  &_left_img {
+    width: 55%;
+    background-size: cover;
+    filter: brightness(50%);
+  }
+}
+
+@media (max-width: 950px) {
+  .join-us {
+    &_left_img {
+      display: none;
+    }
+  }
+} 

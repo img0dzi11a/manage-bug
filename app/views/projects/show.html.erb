@@ -1,0 +1,166 @@
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    const toggleButtons = document.querySelectorAll(".toggle-project-form");
+    const formContainer = document.getElementById("new-project-form");
+    
+    toggleButtons.forEach(function(button) {
+      button.addEventListener("click", function() {
+        formContainer.classList.toggle("hidden");
+      });
+    });
+  });
+</script>
+<div class="p-6 overflow-scroll px-0">
+    <%if current_user.user_type == "qa"%>
+      <button class="toggle-project-form h-10 px-5 text-white transition-colors duration-150 bg-blue-500 rounded-lg hover:bg-blue-400 h-12 px-6 m-2 text-lg">Add New Bug</button>
+    <%end%>
+
+    <div id="new-project-form" class="hidden mb-20">
+<div class="heading text-center font-bold text-2xl m-5 text-gray-800">New Project</div>
+<style>
+  body {background:white !important;}
+</style>
+  <%= form_with model: Project.new, method: :post, class: "editor mx-auto w-10/12 flex flex-col text-gray-800 border border-gray-300 p-4 shadow-lg max-w-2xl" do |form| %>
+    <%= form.hidden_field :manager_id, value: current_user.id %>
+    <%= form.text_field :name, class: "title bg-gray-100 border border-gray-300 p-2 mb-4 outline-none", placeholder: "Title" %>
+    <%= form.text_area :description, class: "description bg-gray-100 sec p-3 h-60 border border-gray-300 outline-none", placeholder: "Describe everything about this post here" %>
+
+    <!----------------------HERE COMES THE DROP DOWNS FOR SELECTING DEVELOPERS AND QAS FOR NEW PROJECT WE ARE MAKING-->
+<div class="flex p-20">
+  <div class="relative">
+    <div class="h-10 bg-white flex border border-gray-200 rounded items-center">
+      <input value="Select Developer(s)" name="select" id="select1" class="px-4 appearance-none outline-none text-gray-800 w-full" checked />
+
+      <button class="cursor-pointer outline-none focus:outline-none transition-all text-gray-300 hover:text-gray-600">
+        <svg class="w-4 h-4 mx-2 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <label for="show_more1" class="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-gray-600">
+        <svg class="w-4 h-4 mx-2 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+      </label>
+    </div>
+
+    <input type="checkbox" name="show_more1" id="show_more1" class="hidden peer" checked />
+      <div class="absolute rounded shadow bg-white overflow-hidden hidden peer-checked:flex flex-col w-full mt-1 border border-gray-200">
+        <% @developers.each do |developer| %>
+          <div class="cursor-pointer group border-t">
+            <label class="form-check form-check-inline">
+              <%= check_box_tag "project[developer_ids][]", developer.id, false, class: "form-check-input" %>
+              <%= developer.name %>
+            </label>
+          </div>
+        <% end %>
+      </div>
+  </div>
+
+  <div class="relative">
+    <div class="h-10 bg-white flex border border-gray-200 rounded items-center">
+      <input value="Select QA(s)" name="select" id="select2" class="px-4 appearance-none outline-none text-gray-800 w-full" checked />
+
+      <button class="cursor-pointer outline-none focus:outline-none transition-all text-gray-300 hover:text-gray-600">
+        <svg class="w-4 h-4 mx-2 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+      <label for="show_more2" class="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-gray-600">
+        <svg class="w-4 h-4 mx-2 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="18 15 12 9 6 15"></polyline>
+        </svg>
+      </label>
+    </div>
+  </div>
+</div>
+
+
+
+    <!-- buttons -->
+    <div class="buttons flex">
+      <div class="toggle-project-form btn border border-gray-300 p-1 px-4 font-semibold cursor-pointer text-gray-500 ml-auto">Cancel</div>
+      <%= form.submit "Create Project", class: "btn border border-indigo-500 p-1 px-4 font-semibold cursor-pointer text-gray-200 ml-2 bg-indigo-500" %>
+    </div>
+  <% end %>
+
+  </div>
+    
+    
+    <table class="mt-4 w-full min-w-max table-auto text-left">
+        <thead>
+        <tr>
+            <th class="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50">
+            <p class="antialiased font-sans text-sm text-blue-gray-900 flex items-center justify-between gap-2 font-normal leading-none opacity-70">Bug Details <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true" class="h-4 w-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"></path>
+                </svg>
+            </p>
+            </th>
+            <th class="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50">
+            <p class="antialiased font-sans text-sm text-blue-gray-900 flex items-center justify-between gap-2 font-normal leading-none opacity-70">Assigned To<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true" class="h-4 w-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"></path>
+                </svg>
+            </p>
+            </th>
+            <th class="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50">
+            <p class="antialiased font-sans text-sm text-blue-gray-900 flex items-center justify-between gap-2 font-normal leading-none opacity-70">Status<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true" class="h-4 w-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"></path>
+                </svg>
+            </p>
+            </th>
+            <th class="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50">
+            <p class="antialiased font-sans text-sm text-blue-gray-900 flex items-center justify-between gap-2 font-normal leading-none opacity-70">Due Date<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true" class="h-4 w-4">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"></path>
+                </svg>
+            </p>
+            </th>
+            <th class="cursor-pointer border-y border-blue-gray-100 bg-blue-gray-50/50 p-4 transition-colors hover:bg-blue-gray-50">
+            <p class="antialiased font-sans text-sm text-blue-gray-900 flex items-center justify-between gap-2 font-normal leading-none opacity-70">Actions</p>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @bugs.each do |bug| %>
+            <tr>
+            <td class="p-4 border-b border-blue-gray-50">
+                <div class="flex items-center gap-3">
+                <div class="flex flex-col">
+                    <p class="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-normal"><%= bug.title %></p>
+                    <p class="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-normal opacity-70"><%= bug.description %></p>
+                </div>
+                </div>
+            </td>
+            <td class="p-4 border-b border-blue-gray-50">
+                <div class="flex items-center gap-3">
+                <img src="https://demos.creative-tim.com/test/corporate-ui-dashboard/assets/img/team-3.jpg" alt="John Michael" class="inline-block relative object-cover object-center !rounded-full w-9 h-9 rounded-md">
+                <div class="flex flex-col">
+                    <p class="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-normal"><%= bug.developer.name %></p>
+                    <p class="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-normal opacity-70"><%= bug.developer.email %></p>
+                </div>
+                </div>
+            </td>
+            <td class="p-4 border-b border-blue-gray-50">
+                <div class="w-max">
+                <div class="relative grid items-center font-sans font-bold uppercase whitespace-nowrap select-none bg-green-500/20 text-green-600 py-1 px-2 text-xs rounded-md" style="opacity: 1;">
+                    <span class=""><%= bug.status %></span>
+                </div>
+                </div>
+            </td>
+            <td class="p-4 border-b border-blue-gray-50">
+                <p class="block antialiased font-sans text-sm leading-normal text-blue-gray-900 font-normal"><%= bug.deadline %></p>
+            </td>
+            <td class="p-4 border-b border-blue-gray-50">
+                <button class="relative align-middle select-none font-sans font-medium text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none w-10 max-w-[40px] h-10 max-h-[40px] rounded-lg text-xs text-blue-gray-500 hover:bg-blue-gray-500/10 active:bg-blue-gray-500/30" type="button">
+                <span class="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" class="h-4 w-4">
+                    <path d="M21.731 2.269a2.625 2.625 0 00-3.712 0l-1.157 1.157 3.712 3.712 1.157-1.157a2.625 2.625 0 000-3.712zM19.513 8.199l-3.712-3.712-12.15 12.15a5.25 5.25 0 00-1.32 2.214l-.8 2.685a.75.75 0 00.933.933l2.685-.8a5.25 5.25 0 002.214-1.32L19.513 8.2z"></path>
+                    </svg>
+                </span>
+                </button>
+            </td>
+            </tr>
+        <% end %>
+        </tbody>
+    </table>
+</div>
