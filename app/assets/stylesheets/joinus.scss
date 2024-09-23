@@ -1,20 +1,24 @@
 @import 'application';
 
+.session_left_img {
+  width: 55%;
+  background-size: cover;
+  filter: brightness(50%);
+}
+
 .join-us {
   display: flex;
-  height: 100vh;
 
   &_logo {
     margin: 0 auto;
-    margin-bottom: 30px;
+    margin-bottom: 8px;
+    margin-top: 200px;
   }
 
   &_right {
     flex: 1;
     display: flex;
     justify-content: center;
-    align-items: center;
-    background-color: #ffff;
 
     &_already {
       font-size: 0.75rem;
@@ -33,7 +37,6 @@
       max-width: 500px;
       text-align: center;
       flex-direction: column;
-      justify-content: center;
       border-radius: 10px;
       padding: 20px;
 
@@ -59,18 +62,31 @@
       }
     }
   }
-
-  &_left_img {
-    width: 55%;
-    background-size: cover;
-    filter: brightness(50%);
-  }
 }
 
-@media (max-width: 950px) {
+@media (max-width: 1024px){
   .join-us {
-    &_left_img {
-      display: none;
+    &_logo {
+      margin-top: 100px;
     }
+  }  
+}
+
+@media (max-width: 380px) {
+  .join-us_right_card {
+    &_text {
+      margin-bottom: 30px;
+    }
+
+    &_links_list{
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      * {
+        margin-bottom: 10px;
+      }
+    }
+
   }
-} 
+}

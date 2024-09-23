@@ -2,7 +2,7 @@
 <%= stylesheet_link_tag 'joinus' %>
 
 <div class="join-us">
-  <%= image_tag("signup.jpg", alt: "Description of the image", class: 'join-us_left_img') %>
+  <%= image_tag("signup.jpg", alt: "Description of the image", class: 'session_left_img') %>
   <div class="join-us_right">
     <div class="join-us_right_card">
       <%= image_tag('logo_temp.png', alt: 'Logo', class: 'site_logo join-us_logo') %>
@@ -10,14 +10,14 @@
       <p class="join-us_right_card_text">To begin this journey, tell us what type of account you’d be opening.</p>
 
       <div class="join-us_right_card_links_list">
-        <%= link_to 'QA Engineer', signup_path(user_type: 'qa'), class: 'join-us_right_card_links_list_qa' %>
-        <%= link_to 'Developer', signup_path(user_type: 'developer'), class: 'join-us_right_card_links_list_se' %>
-        <%= link_to 'Manager', signup_path(user_type: 'manager'), class: 'join-us_right_card_links_list_mgr' %>
+        <%= link_to 'QA Engineer', signup_path(user_type: 'QA'), class: 'join-us_right_card_links_list_qa' %>
+        <%= link_to 'Developer', signup_path(user_type: 'Developer'), class: 'join-us_right_card_links_list_se' %>
+        <%= link_to 'Manager', signup_path(user_type: 'Manager'), class: 'join-us_right_card_links_list_mgr' %>
       </div>
 
-      <div class="join-us_right_already">
-        <p class="join-us_right_already_text">Already have an account?</p>
-        <%= link_to "Login to your account", login_path, class: 'join-us_right_already_link' %>
+      <div class="already_account">
+        <p class="already_account_text">Already have an account?</p>
+        <%= link_to "Login to your account", login_path, class: 'already_account_link' %>
       </div>
     </div>
   </div>

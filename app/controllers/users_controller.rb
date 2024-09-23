@@ -3,7 +3,7 @@ class UsersController < ApplicationController
 
     def new
         case params[:user_type]
-        when 'qa', 'developer', 'manager'
+        when 'QA', 'Developer', 'Manager'
             @user_type = params[:user_type]
         else
 

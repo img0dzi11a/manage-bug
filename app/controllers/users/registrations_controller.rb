@@ -9,7 +9,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
       
     else
       case params[:user_type]
-      when 'qa', 'developer', 'manager'
+      when 'QA', 'Developer', 'Manager'
           @user_type = params[:user_type]
       else
 

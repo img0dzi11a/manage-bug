@@ -1,23 +1,21 @@
-<main class="grid grid-cols-9 gap-4 w-screen">
-    <%= image_tag("signup.jpg", alt: "Description of the image", class: "col-span-4 h-full w-full object-cover filter brightness-75") %>
-    <%= form_with model: User.new, method: :post, url: signup_path(user_type: @user_type), class: "col-span-5 flex flex-col justify-center items-center space-y-5" do |f| %>
+<%= stylesheet_link_tag 'signup_page' %>
 
-        <h2 class="text-3xl font-semibold text-indigo-900">Sign Up as <%= @user_type %></h2>
-        <p class="text-base text-gray-500">Please fill your information below</p>
-        <%= f.hidden_field :user_type, value: @user_type %>
-        
-        <%= f.text_field :name, class: "w-1/2 h-16 px-5 bg-gray-100 border-solid focus: outline-none focus:ring", placeholder: "Name", required: true %>
-        
-        <%= f.text_field :phone, class: "w-1/2 h-16 px-5 bg-gray-100 border-solid focus: outline-none focus:ring", placeholder: "Phone number", required: true %>
-        
-        <%= f.email_field :email, class: "w-1/2 h-16 px-5 bg-gray-100 border-solid focus: outline-none focus:ring", placeholder: "abc@example.com", required: true %>
-        
-        <%= f.password_field :password, class: "w-1/2 h-16 px-5 bg-gray-100 border-solid focus: outline-none focus:ring", placeholder: "password", minlength: 8, required: true %>
-        
-        <%= f.submit "Sign Up", class: "h-10 px-5 m-2 text-indigo-100 transition-colors duration-150 bg-indigo-700 rounded-lg hover:bg-indigo-800 h-12 px-6 m-2 text-lg" %>
-        <div class="col-span-5 flex justify-center space-x-4">
-            <p class="text-gray-400 hover:underline">Already have an account?</p>
-            <%= link_to "Login to your account", login_path, class: "text-indigo-700 hover:underline" %>
-        </div>
-    <% end %>
-</main>
+<div class="signup_section">
+  <%= image_tag("signup.jpg", alt: "Description of the image", class: 'session_left_img') %>
+
+  <%= form_with model: User.new, method: :post, url: signup_path(user_type: @user_type), class: 'signup_section_form' do |f| %>
+    <h2 class="signup_section_form_heading">Sign Up as <%= @user_type %></h2>
+    <p class="signup_section_form_text">Please fill your information below</p>
+    <%= f.hidden_field :user_type, value: @user_type, class: 'signup_section_form_field' %>
+    <%= f.text_field :name, placeholder: "Name", required: true, class: 'signup_section_form_field' %>
+    <%= f.text_field :phone, placeholder: "Phone number", required: true, class: 'signup_section_form_field' %>
+    <%= f.email_field :email, placeholder: "abc@example.com", required: true, class: 'signup_section_form_field' %>
+    <%= f.password_field :password, placeholder: "password", minlength: 8, required: true, class: 'signup_section_form_field' %>
+    <%= f.submit "Sign Up", class: 'signup_section_form_btn' %>
+    
+    <div class="already_account">
+      <p class="already_account_text">Already have an account?</p>
+      <%= link_to "Login to your account", login_path, class: 'already_account_link' %>
+    </div>
+  <% end %>
+</div>

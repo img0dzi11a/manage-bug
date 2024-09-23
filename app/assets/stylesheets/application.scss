@@ -3,7 +3,7 @@
 }
 
 $text-color: #666666;
-$background-color: #f9f9f9;
+$background-color: #ffffff;
 $blue-btn-bg: #1A56DB;
 $green-btn-bg: #17c236;
 $blue-btn-text: #ffffff;
@@ -25,6 +25,31 @@ body {
   display: inline-block;
 }
 
+.session_left_img {
+  width: 55%;
+  height: 100vh;
+  background-size: cover;
+  filter: brightness(50%);
+}
+
+.already_account {
+  font-size: 0.75rem;
+  margin: 15px 10px 10px 0px;
+  &_text {
+    display: inline-block;
+  }
+  &_link {
+    color: $small-link-color;
+    display: inline-block;
+  }
+}
+
+@media (max-width: 1024px) {
+  .session_left_img {
+    display: none;
+  }
+}
+
 @media (max-width: 1024px) {
   :root {
     font-size: 15px;
@@ -43,7 +68,7 @@ body {
 
 @media (max-width: 470px) {
   :root {
-    font-size: 14px;
+    font-size: 13px;
   }
   $section-heading-font-size: 1.5rem;
   $main-description-font-size: 0.8rem;
@@ -51,16 +76,16 @@ body {
 
 @media (max-width: 380px) {
   :root {
-    font-size: 14px;
+    font-size: 12px;
   }
-  $section-heading-font-size: 1.4rem;
-  $main-description-font-size: 0.75rem;
+  $section-heading-font-size: 1rem;
+  $main-description-font-size: 0.5rem;
 }
 
 @media (max-width: 320px) {
   :root {
-    font-size: 14px;
+    font-size: 12px;
   }
-  $section-heading-font-size: 1.2rem;
-  $main-description-font-size: 0.7rem;
+  $section-heading-font-size: 1rem;
+  $main-description-font-size: 0.5rem;
 }
