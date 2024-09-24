@@ -1,88 +1,7 @@
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    const toggleButtons = document.querySelectorAll(".toggle-project-form");
-    const formContainer = document.getElementById("new-project-form");
-
-    toggleButtons.forEach(function(button) {
-      button.addEventListener("click", function() {
-        formContainer.classList.toggle("hidden");
-      });
-    });
-  });
-</script>
-<main class="projects max-w-6xl m-auto">
+<div class="projects max-w-6xl m-auto">
   <div id="new-project-form" class="hidden mb-20">
     <div class="heading text-center font-bold text-2xl m-5 text-gray-800">New Project</div>
-    <style>
-      body {background:white !important;}
-    </style>
-    <%= form_with model: Project.new, method: :post, class: "editor mx-auto w-10/12 flex flex-col text-gray-800 border border-gray-300 p-4 shadow-lg max-w-2xl" do |form| %>
-      <%= form.hidden_field :manager_id, value: current_user.id %>
-      <%= form.text_field :name, class: "title bg-gray-100 border border-gray-300 p-2 mb-4 outline-none", placeholder: "Title" %>
-      <%= form.text_area :description, class: "description bg-gray-100 sec p-3 h-60 border border-gray-300 outline-none", placeholder: "Describe everything about this post here" %>
-      <!----------------------HERE COMES THE DROP DOWNS FOR SELECTING DEVELOPERS AND QAS FOR NEW PROJECT WE ARE MAKING-->
-      <div class="flex p-20">
-        <div class="relative">
-          <div class="h-10 bg-white flex border border-gray-200 rounded items-center">
-            <input value="Select Developer(s)" name="select" id="select1" class="px-4 appearance-none outline-none text-gray-800 w-full" checked />
-            <button class="cursor-pointer outline-none focus:outline-none transition-all text-gray-300 hover:text-gray-600">
-              <svg class="w-4 h-4 mx-2 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-              </svg>
-            </button>
-            <label for="show_more1" class="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-gray-600">
-              <svg class="w-4 h-4 mx-2 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="18 15 12 9 6 15"></polyline>
-              </svg>
-            </label>
-          </div>
-          <input type="checkbox" name="show_more1" id="show_more1" class="hidden peer" checked />
-          <div class="absolute rounded shadow bg-white overflow-hidden hidden peer-checked:flex flex-col w-full mt-1 border border-gray-200">
-            <% @developers.each do |developer| %>
-              <div class="cursor-pointer group border-t">
-                <label class="form-check form-check-inline">
-                  <%= check_box_tag "project[developer_ids][]", developer.id, false, class: "form-check-input" %>
-                  <%= developer.name %>
-                </label>
-              </div>
-            <% end %>
-          </div>
-        </div>
-        <div class="relative">
-          <div class="h-10 bg-white flex border border-gray-200 rounded items-center">
-            <input value="Select QA(s)" name="select" id="select2" class="px-4 appearance-none outline-none text-gray-800 w-full" checked />
-            <button class="cursor-pointer outline-none focus:outline-none transition-all text-gray-300 hover:text-gray-600">
-              <svg class="w-4 h-4 mx-2 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <line x1="18" y1="6" x2="6" y2="18"></line>
-                <line x1="6" y1="6" x2="18" y2="18"></line>
-              </svg>
-            </button>
-            <label for="show_more2" class="cursor-pointer outline-none focus:outline-none border-l border-gray-200 transition-all text-gray-300 hover:text-gray-600">
-              <svg class="w-4 h-4 mx-2 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="18 15 12 9 6 15"></polyline>
-              </svg>
-            </label>
-          </div>
-          <input type="checkbox" name="show_more2" id="show_more2" class="hidden peer" checked />
-          <div class="absolute rounded shadow bg-white overflow-hidden hidden peer-checked:flex flex-col w-full mt-1 border border-gray-200">
-            <% @qas.each do |qa| %>
-              <div class="cursor-pointer group border-t">
-                <label class="form-check form-check-inline">
-                  <%= check_box_tag "project[qa_ids][]", qa.id, false, class: "form-check-input" %>
-                  <%= qa.name %>
-                </label>
-              </div>
-            <% end %>
-          </div>
-        </div>
-      </div>
-      <!-- buttons -->
-      <div class="buttons flex">
-        <div class="toggle-project-form btn border border-gray-300 p-1 px-4 font-semibold cursor-pointer text-gray-500 ml-auto">Cancel</div>
-        <%= form.submit "Create Project", class: "btn border border-indigo-500 p-1 px-4 font-semibold cursor-pointer text-gray-200 ml-2 bg-indigo-500" %>
-      </div>
-    <% end %>
+    <%= render 'shared/new_project_form', user: @user %>
   </div>
   <div class="projects-panel border-solid border border-gray-200 flex justify-between mb-20 p-3">
     <div>
@@ -150,4 +69,4 @@
       <% end %>
     <%end%>
   </div>
-</main>
+</div>
